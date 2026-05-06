@@ -1,23 +1,42 @@
-import LanguageToggle from "./LanguageToggle";
-import { content } from "../data/content";
-
 export default function Navbar({ language, setLanguage }) {
-  const t = content[language];
+  const navItems = [
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
     <header className="navbar">
-      <div className="navbar-brand">Lokesh</div>
+      <a href="#top" className="navbar-brand">
+        Lokesh
+      </a>
 
       <nav className="navbar-links">
-        <a href="#about">{t.nav.about}</a>
-        <a href="#skills">{t.nav.skills}</a>
-        <a href="#experience">{t.nav.experience}</a>
-        <a href="#projects">{t.nav.projects}</a>
-        <a href="#thesis">{t.nav.thesis}</a>
-        <a href="#contact">{t.nav.contact}</a>
+        {navItems.map((item) => (
+          <a key={item.href} href={item.href}>
+            {item.label}
+          </a>
+        ))}
       </nav>
 
-      <LanguageToggle language={language} setLanguage={setLanguage} />
+      <div className="language-toggle">
+        <button
+          type="button"
+          className={language === "en" ? "active" : ""}
+          onClick={() => setLanguage("en")}
+        >
+          EN
+        </button>
+        <button
+          type="button"
+          className={language === "de" ? "active" : ""}
+          onClick={() => setLanguage("de")}
+        >
+          DE
+        </button>
+      </div>
     </header>
   );
 }

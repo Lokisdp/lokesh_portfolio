@@ -9,15 +9,15 @@ export const content = {
       contact: "Contact",
     },
     hero: {
-      name: "Lokesh Reddy Sodanapalli",
-      title: "Embedded Systems Test & Integration Engineer",
-      subtitle:
-        "Communication Protocols | System Validation | Verification & Validation | Python Automation",
-      description:
-        "I work on complex embedded and distributed systems with a focus on communication interfaces, verification and validation, debugging, and automation. My experience spans system-level testing, protocol-oriented integration, and Python-based engineering workflows across cross-domain technical environments.",
-      ctaPrimary: "View Projects",
-      ctaSecondary: "LinkedIn",
+      greeting: "Hello, I’m",
+      name: "Lokesh Reddy",
+      title: "Embedded Systems Engineer",
+      summary:
+        "Embedded Systems Engineer with experience in software validation, test automation, and system integration for embedded electrical and electronic systems. Skilled in Python, Robot Framework, Linux, CI/CD-oriented workflows, and communication protocols, with a strong focus on reliability, process improvement, and structured problem solving across complex technical environments.",
+      ctaPrimary: "View Work",
+      ctaDownloadCv: "Download CV",
       ctaGithub: "GitHub",
+      ctaLinkedIn: "LinkedIn",
     },
   },
 
@@ -31,15 +31,15 @@ export const content = {
       contact: "Kontakt",
     },
     hero: {
-      name: "Lokesh Reddy Sodanapalli",
-      title: "Embedded Systems Test- und Integrationsingenieur",
-      subtitle:
-        "Kommunikationsprotokolle | Systemvalidierung | Verifikation & Validierung | Python-Automatisierung",
-      description:
-        "Ich arbeite an komplexen Embedded- und verteilten Systemen mit Fokus auf Kommunikationsschnittstellen, Verifikation und Validierung, Debugging und Automatisierung. Meine Erfahrung umfasst systemnahe Tests, protokollorientierte Integration und Python-basierte Engineering-Workflows in domänenübergreifenden technischen Umgebungen.",
+      greeting: "Hallo, ich bin",
+      name: "Lokesh Reddy",
+      title: "Embedded-Systems-Ingenieur",
+      summary:
+        "Embedded-Systems-Ingenieur mit Erfahrung in Softwarevalidierung, Testautomatisierung und Systemintegration für eingebettete elektrische und elektronische Systeme. Fundierte Kenntnisse in Python, Robot Framework, Linux, CI/CD-orientierten Workflows und Kommunikationsprotokollen, mit klarem Fokus auf Zuverlässigkeit, Prozessverbesserung und strukturiertes Problemlösen in komplexen technischen Umgebungen.",
       ctaPrimary: "Projekte ansehen",
-      ctaSecondary: "LinkedIn",
+      ctaDownloadCv: "CV herunterladen",
       ctaGithub: "GitHub",
+      ctaLinkedIn: "LinkedIn",
     },
   },
 };
