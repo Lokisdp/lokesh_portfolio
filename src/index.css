@@ -19,14 +19,23 @@ body,
   padding: 0;
 }
 
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  scroll-padding-top: 84px;
 }
 
 body {
   background: linear-gradient(180deg, #0b1020 0%, #11182d 100%);
   color: #f5f7fa;
-  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 a {
@@ -45,9 +54,11 @@ button {
 /* Navbar */
 
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 10000;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -55,6 +66,7 @@ button {
   padding: 1rem 2rem;
   background: rgba(11, 16, 32, 0.88);
   backdrop-filter: blur(14px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -132,7 +144,7 @@ button {
 .section {
   width: min(1320px, 94%);
   margin: 0 auto;
-  padding: 3rem 0;
+  padding: 2.2rem 0;
 }
 
 .section h2 {
@@ -143,19 +155,29 @@ button {
 
 .page-shell {
   min-height: 100vh;
+  padding-top: 74px;
 }
 
 .snap-page {
   min-height: 100vh;
 }
 
-.snap-screen {
-  min-height: 88vh;
+.page-section {
+  min-height: calc(100svh - 96px);
+  display: block;
+  padding: 4.5rem 0;
+  scroll-margin-top: 96px;
+}
+
+.page-section > .section {
+  width: min(1320px, 94%);
+  scroll-margin-top: 92px;
+}
+
+.hero-screen {
+  min-height: calc(100svh - 88px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 72px;
-  padding-bottom: 28px;
+  align-items: center;
 }
 
 .hero-screen,
@@ -163,48 +185,71 @@ button {
 .experience-screen,
 .projects-screen,
 .contact-screen {
-  justify-content: center;
+  min-height: calc(100svh - 96px);
 }
 
 .intro-screen {
-  justify-content: center;
   gap: 1rem;
+}
+
+.intro-screen {
+  min-height: calc(100svh - 96px);
+  display: flex;
+  align-items: center;
 }
 
 /* Reveal Motion */
 
-.reveal-section {
-  opacity: 0;
-  transform: translateY(70px);
-  transition: opacity 1s ease, transform 1s ease;
+.reveal-section > .section {
+  opacity: 0.18;
+  transform: translate3d(0, 72px, 0) scale(0.985);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
-.reveal-section.is-visible {
+.reveal-section.is-visible > .section {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
-@keyframes fadeUpSoft {
+.reveal-section.is-visible .contact-card {
+  animation: contactReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-section.is-visible .sticky-note {
+  animation: sectionCardReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes contactReveal {
   from {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 0.18;
+    transform: translate3d(0, 72px, 0) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
-.reveal-section.is-visible .section-kicker,
-.reveal-section.is-visible h2,
-.reveal-section.is-visible .sticky-note,
-.reveal-section.is-visible .skills-capability-card,
-.reveal-section.is-visible .experience-card,
-.reveal-section.is-visible .project-card,
-.reveal-section.is-visible .project-featured-card,
-.reveal-section.is-visible .contact-card {
-  animation: fadeUpSoft 0.9s ease both;
+@keyframes sectionCardReveal {
+  from {
+    opacity: 0.18;
+    transform: translate3d(0, 72px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section > .section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Buttons */
@@ -236,7 +281,7 @@ button {
 /* Hero */
 
 .hero {
-  min-height: 78vh;
+  min-height: auto;
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
   gap: 3rem;
@@ -257,7 +302,7 @@ button {
 }
 
 .hero-name-large {
-  font-size: clamp(3rem, 6vw, 5.4rem);
+  font-size: clamp(3rem, 5.2vw, 4.8rem);
   line-height: 0.96;
   margin-bottom: 0.85rem;
   color: #ffffff;
@@ -272,7 +317,7 @@ button {
 }
 
 .hero-summary {
-  max-width: 760px;
+  max-width: 680px;
   color: #cfd8ec;
   font-size: 1.02rem;
   line-height: 1.85;
@@ -318,8 +363,8 @@ button {
 .hero-visual-panel {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  min-height: 560px;
+  max-width: 430px;
+  min-height: 430px;
   border-radius: 32px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1220,13 +1265,15 @@ button {
 .chat-panel {
   position: fixed;
   right: 22px;
+  top: 92px;
   bottom: 150px;
   z-index: 6000;
   width: min(390px, calc(100vw - 32px));
-  max-height: min(620px, calc(100vh - 188px));
+  height: auto;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overscroll-behavior: contain;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
   background: rgba(11, 16, 32, 0.96);
@@ -1237,6 +1284,7 @@ button {
 
 .chat-panel-header {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -1310,6 +1358,7 @@ button {
   gap: 0.7rem;
   min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1rem;
 }
 
@@ -1359,6 +1408,48 @@ button {
   font-weight: 600;
 }
 
+.chat-action-wrap {
+  max-width: 96%;
+}
+
+.chat-action-message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chat-action-message p {
+  color: #dfe7f8;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.chat-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.chat-action-buttons button {
+  border: 1px solid rgba(242, 194, 123, 0.26);
+  border-radius: 999px;
+  background: rgba(242, 194, 123, 0.1);
+  color: #f5f7fa;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.52rem 0.72rem;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.chat-action-buttons button:hover {
+  background: rgba(242, 194, 123, 0.16);
+  border-color: rgba(242, 194, 123, 0.42);
+  transform: translateY(-1px);
+}
+
 .chat-thinking {
   display: inline-flex;
   align-items: center;
@@ -1395,7 +1486,8 @@ button {
 }
 
 .chat-question-prompt {
-  margin-top: 0.7rem;
+  flex: 0 0 auto;
+  margin-top: 0;
   padding: 1rem 1rem 1.15rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -1439,10 +1531,11 @@ button {
 
 .chat-quick-actions {
   display: grid;
+  flex: 0 0 auto;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.55rem;
   padding: 1.1rem 1rem 0.95rem;
-  margin-top: 0.85rem;
+  margin-top: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -1473,6 +1566,7 @@ button {
 
 .chat-suggestions {
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
   gap: 0.65rem;
   padding: 0.75rem 1rem 1rem;
@@ -1498,6 +1592,7 @@ button {
 }
 
 .chat-followup-hint {
+  flex: 0 0 auto;
   color: #9fb0d1;
   font-size: 0.78rem;
   line-height: 1.45;
@@ -1507,6 +1602,7 @@ button {
 
 .chat-input-row {
   display: grid;
+  flex: 0 0 auto;
   grid-template-columns: 1fr 42px;
   gap: 0.55rem;
   padding: 0.95rem 1rem 1rem;
@@ -1639,18 +1735,24 @@ button {
 }
 
 @media (max-width: 900px) {
-  body {
-    overflow: auto;
+  html {
+    scroll-snap-type: none;
+    scroll-padding-top: 132px;
+  }
+
+  .page-shell {
+    padding-top: 132px;
   }
 
   .navbar {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    gap: 0.9rem;
+    grid-template-columns: auto 1fr auto;
+    justify-items: stretch;
+    gap: 0.75rem;
     padding: 1rem 1.2rem;
   }
 
   .navbar-links {
+    grid-column: 1 / -1;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 0.8rem;
@@ -1659,14 +1761,33 @@ button {
 
   .section {
     width: min(94%, 100%);
-    padding: 4rem 0;
+    padding: 2.6rem 0;
   }
 
-  .snap-screen {
+  .page-section {
     min-height: auto;
     display: block;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 2.4rem 0;
+    scroll-snap-align: none;
+    scroll-margin-top: 132px;
+  }
+
+  .hero-screen,
+  .skills-screen,
+  .experience-screen,
+  .projects-screen,
+  .contact-screen,
+  .intro-screen {
+    min-height: auto;
+  }
+
+  .page-section > .section {
+    width: min(94%, 100%);
+  }
+
+  .reveal-section > .section {
+    opacity: 0.3;
+    transform: translate3d(0, 44px, 0);
   }
 
   .hero {
@@ -1710,9 +1831,11 @@ button {
   }
 
   .chat-panel {
-    right: 16px;
-    bottom: 138px;
-    max-height: min(560px, calc(100vh - 160px));
+    right: 18px;
+    top: 132px;
+    bottom: 128px;
+    width: calc(100vw - 36px);
+    height: auto;
   }
 
   .intro-message {
@@ -1779,7 +1902,15 @@ button {
 
 @media (max-width: 600px) {
   .navbar {
-    align-items: flex-start;
+    align-items: center;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .page-shell {
+    padding-top: 116px;
   }
 
   .navbar-brand {
@@ -1787,19 +1918,41 @@ button {
   }
 
   .navbar-links {
+    grid-column: 1 / -1;
     width: 100%;
+    flex-wrap: nowrap;
+    gap: 0.55rem;
+    overflow-x: auto;
+    padding-bottom: 0.1rem;
+    scrollbar-width: none;
+  }
+
+  .navbar-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-links a {
+    flex: 0 0 auto;
+    font-size: 0.84rem;
   }
 
   .language-toggle {
-    width: 100%;
+    width: auto;
+    justify-self: end;
   }
 
   .language-toggle button {
-    flex: 1;
+    flex: 0 0 auto;
+    padding: 0.42rem 0.72rem;
   }
 
   .section h2 {
     font-size: 1.6rem;
+  }
+
+  .section {
+    width: min(92%, 100%);
+    padding: 2.2rem 0;
   }
 
   .hero-greeting {
@@ -1829,14 +1982,51 @@ button {
   }
 
   .chat-bubble {
-    right: 22px;
-    bottom: 82px;
+    right: 12px;
+    bottom: 70px;
+    max-width: calc(100vw - 24px);
   }
 
   .chat-panel {
-    right: 14px;
-    bottom: 140px;
-    width: calc(100vw - 28px);
+    right: 16px;
+    top: 116px;
+    bottom: 124px;
+    width: calc(100vw - 32px);
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .chat-panel-header {
+    gap: 0.6rem;
+    padding: 0.8rem;
+  }
+
+  .chat-panel-title {
+    gap: 0.55rem;
+  }
+
+  .chat-panel-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .chat-panel-close {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 0.5rem;
+  }
+
+  .chat-message-wrap {
+    max-width: 94%;
+  }
+
+  .chat-quick-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chat-input-row {
+    grid-template-columns: 1fr 40px;
+    padding: 0.8rem;
   }
 
   .chat-bubble-text strong {

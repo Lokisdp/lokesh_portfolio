@@ -1,6 +1,9 @@
 import { FiArrowUp } from "react-icons/fi";
 
-export default function BackToTop() {
+export default function BackToTop({ language = "en" }) {
+  const label = language === "de" ? "Nach oben" : "Back to top";
+  const text = language === "de" ? "Oben" : "Top";
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -13,13 +16,13 @@ export default function BackToTop() {
       type="button"
       className="floating-top-button"
       onClick={scrollToTop}
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label={label}
+      title={label}
     >
       <span className="floating-top-button-icon" aria-hidden="true">
         <FiArrowUp />
       </span>
-      <span>Top</span>
+      <span>{text}</span>
     </button>
   );
 }

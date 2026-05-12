@@ -10,8 +10,14 @@ import {
 
 const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`;
 
+const labels = {
+  en: ["Embedded", "Validation", "Interfaces", "Automation", "Radar", "Learning"],
+  de: ["Embedded", "Validierung", "Schnittstellen", "Automatisierung", "Radar", "Lernen"],
+};
+
 export default function Hero({ language }) {
   const t = content[language].hero;
+  const heroLabels = labels[language] || labels.en;
 
   return (
     <section className="hero section">
@@ -25,27 +31,27 @@ export default function Hero({ language }) {
         <div className="hero-symbol-row">
           <div className="hero-symbol-item">
             <FiCpu className="hero-symbol floating-icon" />
-            <span>Embedded</span>
+            <span>{heroLabels[0]}</span>
           </div>
           <div className="hero-symbol-item">
             <FiActivity className="hero-symbol pulse-icon" />
-            <span>Validation</span>
+            <span>{heroLabels[1]}</span>
           </div>
           <div className="hero-symbol-item">
             <FiGitBranch className="hero-symbol signal-icon" />
-            <span>Interfaces</span>
+            <span>{heroLabels[2]}</span>
           </div>
           <div className="hero-symbol-item">
             <FiTool className="hero-symbol rotate-icon" />
-            <span>Automation</span>
+            <span>{heroLabels[3]}</span>
           </div>
           <div className="hero-symbol-item">
             <FiRadio className="hero-symbol floating-icon" />
-            <span>Radar</span>
+            <span>{heroLabels[4]}</span>
           </div>
           <div className="hero-symbol-item">
             <FiTrendingUp className="hero-symbol pulse-icon" />
-            <span>Learning</span>
+            <span>{heroLabels[5]}</span>
           </div>
         </div>
 

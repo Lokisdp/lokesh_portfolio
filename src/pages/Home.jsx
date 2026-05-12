@@ -19,27 +19,27 @@ export default function Home({ language, setLanguage }) {
         </RevealSection>
 
         <RevealSection id="about" className="intro-screen">
-          <IntroMessage />
+          <IntroMessage language={language} />
         </RevealSection>
 
         <RevealSection id="skills" className="skills-screen">
-          <Skills />
+          <Skills language={language} />
         </RevealSection>
 
         <RevealSection id="experience" className="experience-screen">
-          <Experience />
+          <Experience language={language} />
         </RevealSection>
 
         <RevealSection id="projects" className="projects-screen">
-          <Projects />
+          <Projects language={language} />
         </RevealSection>
 
         <RevealSection id="contact" className="contact-screen">
-          <Footer />
+          <Footer language={language} />
         </RevealSection>
       </main>
 
-      <ChatBubble />
+      <ChatBubble key={language} language={language} />
     </div>
   );
 }

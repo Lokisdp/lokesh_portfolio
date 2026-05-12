@@ -407,3 +407,36 @@ export function findLokiAnswer(input) {
     suggestions: questionBank.menu,
   };
 }
+
+const germanAnswers = {
+  roles:
+    "Lokesh sucht vor allem Vollzeitrollen in Validierung, Verifikation, Testing, Systemintegration, Embedded Systems und Testautomatisierung. Passende Rollen sind Validation Engineer, Verification Engineer, Test Engineer, System Integration Engineer, Embedded Test Engineer, Test Automation Engineer, Systems Engineer und System Validation Engineer.",
+  industries:
+    "Lokesh interessiert sich für komplexe technische Systeme, in denen Hardware, Software, Schnittstellen, Kommunikation und Validierung zusammenkommen. Dazu gehören Automotive, autonome Fahrzeuge, ADAS, Robotik, Luftfahrt, Verteidigung, Drohnen, Embedded Systems, Sensorsysteme und intelligente Mobilität.",
+  about:
+    "Lokesh ist ein Embedded-Systems- und Validierungsingenieur mit Erfahrung in Testing, Verifikation, Automatisierung, Systemintegration und kommunikationsintensiven technischen Umgebungen. Sein Profil verbindet Embedded-Know-how, Testautomatisierung, Kommunikationsprotokolle, Debugging und strukturierte Validierung.",
+  skills:
+    "Lokeshs Stärken liegen in Systemtests, Integrationstests, Regressionstests, Verifikation und Validierung, Testautomatisierung, Testfallerstellung, anforderungsbasierter Validierung, Debugging, Root-Cause-Analyse und Log-Analyse. Technisch arbeitet er mit Python, Robot Framework, C, C++, Linux, Git, MATLAB und Simulink.",
+  experience:
+    "Lokesh hat in Embedded- und Automotive-Umgebungen gearbeitet, unter anderem in ECU- und Systemvalidierung, Infotainment-Testing, Python-basierter Testautomatisierung, Robot Framework, Protokolltests, Log-Analyse, Debugging, Systemintegration, Testbench-Entwicklung und Requirement-to-Test-Übersetzung.",
+  contact:
+    "Sie erreichen Lokesh unter sdp.lokeshreddy@gmail.com. Sein LinkedIn ist linkedin.com/in/lokeshsdp, sein GitHub ist github.com/Lokisdp, und der CV ist im Profil verfügbar.",
+  hobbies:
+    "Außerhalb der Technik spielt Lokesh Gitarre, schaut Anime, liest Bücher und interessiert sich für Cricket. Das zeigt auch eine persönliche Seite: kreativ, neugierig, geduldig und lernbereit.",
+  availability:
+    "Ja. Lokesh konzentriert sich aktuell auf Vollzeitmöglichkeiten. Je nach Rolle und Gelegenheit ist er auch offen für einen Umzug.",
+  "question-menu":
+    "Sie können mich nach Lokeshs Rollen, Branchen, Fähigkeiten, Erfahrung, Projekten, Masterarbeit, Radarinteresse, Tools, Protokollen, Kontakt, CV, LinkedIn, GitHub, Standort, Hobbys, Umzug und Verfügbarkeit fragen.",
+};
+
+export function localizeLokiResult(result, language) {
+  if (language !== "de") {
+    return result;
+  }
+
+  return {
+    ...result,
+    answer: germanAnswers[result.id] || result.answer,
+    more: undefined,
+  };
+}

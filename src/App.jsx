@@ -24,7 +24,7 @@ function App() {
           element={<Thesis language={language} setLanguage={setLanguage} />}
         />
       </Routes>
-      <BackToTop />
+      <BackToTop language={language} />
     </>
   );
 }

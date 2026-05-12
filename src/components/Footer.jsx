@@ -1,18 +1,34 @@
 import { FiMail, FiLinkedin, FiGithub, FiMapPin } from "react-icons/fi";
 
-export default function Footer() {
+const copy = {
+  en: {
+    kicker: "Contact",
+    title: "Let's Connect",
+    intro:
+      "If you think my background fits your team, role, or project, I'd be glad to connect. I'm especially interested in engineering environments involving embedded systems, robotics, communication interfaces, validation, integration, and radar-related domains.",
+    email: "Email",
+    location: "Location",
+  },
+  de: {
+    kicker: "Kontakt",
+    title: "Lassen Sie uns vernetzen",
+    intro:
+      "Wenn mein Hintergrund zu Ihrem Team, Ihrer Rolle oder Ihrem Projekt passt, freue ich mich über eine Kontaktaufnahme. Besonders interessieren mich Engineering-Umgebungen mit Embedded Systems, Robotik, Kommunikationsschnittstellen, Validierung und Integration.",
+    email: "E-Mail",
+    location: "Standort",
+  },
+};
+
+export default function Footer({ language = "en" }) {
+  const t = copy[language] || copy.en;
+
   return (
-    <footer id="contact" className="footer">
+    <footer className="footer">
       <div className="contact-card">
         <div className="contact-header">
-          <p className="section-kicker">Contact</p>
-          <h2>Let’s Connect</h2>
-          <p className="contact-intro">
-            If you think my background fits your team, role, or project, I’d be
-            glad to connect. I’m especially interested in engineering
-            environments involving embedded systems, communication interfaces,
-            validation, integration, and radar-related domains.
-          </p>
+          <p className="section-kicker">{t.kicker}</p>
+          <h2>{t.title}</h2>
+          <p className="contact-intro">{t.intro}</p>
         </div>
 
         <div className="contact-grid">
@@ -21,7 +37,7 @@ export default function Footer() {
               <FiMail />
             </span>
             <div>
-              <h3>Email</h3>
+              <h3>{t.email}</h3>
               <p>sdp.lokeshreddy@gmail.com</p>
             </div>
           </a>
@@ -61,7 +77,7 @@ export default function Footer() {
               <FiMapPin />
             </span>
             <div>
-              <h3>Location</h3>
+              <h3>{t.location}</h3>
               <p>Chemnitz, Germany</p>
             </div>
           </div>

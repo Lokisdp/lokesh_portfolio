@@ -7,17 +7,106 @@ import {
   FiMonitor,
 } from "react-icons/fi";
 
-export default function Skills() {
+const icons = [FiActivity, FiGitBranch, FiTool, FiCpu, FiMonitor, FiTrendingUp];
+
+const copy = {
+  en: {
+    kicker: "Core Capabilities",
+    title: "Skills That Travel Across Systems",
+    intro:
+      "My strengths sit at the intersection of validation, communication-heavy systems, automation, and engineering adaptability across embedded and integration-focused environments.",
+    focusTitle: "Engineering Focus",
+    focus:
+      "I work best in embedded, communication-driven, and validation-heavy environments where reliability, integration, and structured problem solving matter.",
+    focusTags: ["Embedded", "Validation", "Integration"],
+    levels: ["Strong", "Strong", "Strong", "Growing", "Applied", "Core"],
+    cards: [
+      {
+        title: "Validation & Testing",
+        text: "System-level testing, structured validation, debugging, and verification-oriented engineering workflows.",
+        tags: ["System Validation", "V&V", "Integration Testing", "Regression Testing", "Debugging", "Log Analysis"],
+      },
+      {
+        title: "Communication & Interfaces",
+        text: "Working across protocol-driven systems where clean data flow and interface reliability are essential.",
+        tags: ["CAN", "CAN-FD", "UDS", "DoIP", "TCP/IP", "REST", "UART", "Ethernet"],
+      },
+      {
+        title: "Automation & Tooling",
+        text: "Building repeatable workflows using scripting, automation, and structured tooling to improve engineering efficiency.",
+        tags: ["Python", "Robot Framework", "Linux", "DLT", "Git", "Jenkins", "Jira", "Confluence"],
+      },
+      {
+        title: "Systems & Domains",
+        text: "A foundation shaped by embedded engineering, system integration, control systems, and growing radar-oriented problem solving.",
+        tags: ["Embedded Systems", "System Integration", "Distributed Systems", "Control Systems", "Signal Processing", "Radar Fundamentals"],
+      },
+      {
+        title: "Measurement & Lab Tools",
+        text: "Hands-on work with hardware-oriented tools, prototyping platforms, and laboratory setups used for debugging, validation, and integration.",
+        tags: ["Oscilloscope", "Battery Simulator", "Arduino", "Raspberry Pi", "STM32", "Test Bench Setup"],
+      },
+      {
+        title: "Learning Agility",
+        text: "In a fast-changing engineering world, what matters is not only what I know today, but how quickly I can learn, adapt, and contribute to what comes next.",
+        tags: ["Adaptability", "Fast Learning", "Curiosity", "Growth Mindset"],
+      },
+    ],
+  },
+  de: {
+    kicker: "Kernkompetenzen",
+    title: "Kompetenzen Für Unterschiedliche Systeme",
+    intro:
+      "Meine Stärken liegen an der Schnittstelle von Validierung, kommunikationsintensiven Systemen, Automatisierung und technischer Anpassungsfähigkeit.",
+    focusTitle: "Technischer Fokus",
+    focus:
+      "Ich arbeite besonders gern in eingebetteten, schnittstellengetriebenen und validierungsintensiven Umgebungen, in denen Zuverlässigkeit, Integration und strukturiertes Problemlösen wichtig sind.",
+    focusTags: ["Embedded", "Validierung", "Integration"],
+    levels: ["Stark", "Stark", "Stark", "Wachsend", "Angewandt", "Kern"],
+    cards: [
+      {
+        title: "Validierung & Testing",
+        text: "Systemtests, strukturierte Validierung, Debugging und verifikationsorientierte Engineering-Workflows.",
+        tags: ["Systemvalidierung", "V&V", "Integrationstests", "Regressionstests", "Debugging", "Log-Analyse"],
+      },
+      {
+        title: "Kommunikation & Schnittstellen",
+        text: "Arbeit mit protokollgetriebenen Systemen, bei denen Datenfluss und Schnittstellenzuverlässigkeit entscheidend sind.",
+        tags: ["CAN", "CAN-FD", "UDS", "DoIP", "TCP/IP", "REST", "UART", "Ethernet"],
+      },
+      {
+        title: "Automatisierung & Tools",
+        text: "Aufbau wiederholbarer Abläufe mit Skripting, Automatisierung und strukturiertem Tooling.",
+        tags: ["Python", "Robot Framework", "Linux", "DLT", "Git", "Jenkins", "Jira", "Confluence"],
+      },
+      {
+        title: "Systeme & Domänen",
+        text: "Grundlage aus Embedded Engineering, Systemintegration, Regelungstechnik und wachsender radarorientierter Erfahrung.",
+        tags: ["Embedded Systems", "Systemintegration", "Verteilte Systeme", "Regelungstechnik", "Signalverarbeitung", "Radar-Grundlagen"],
+      },
+      {
+        title: "Mess- & Labortools",
+        text: "Praktische Arbeit mit hardwareorientierten Tools, Prototyping-Plattformen und Laboraufbauten.",
+        tags: ["Oszilloskop", "Batteriesimulator", "Arduino", "Raspberry Pi", "STM32", "Testbench"],
+      },
+      {
+        title: "Lernfähigkeit",
+        text: "In einer schnellen technischen Welt zählt nicht nur, was ich heute weiß, sondern wie schnell ich lernen, mich anpassen und beitragen kann.",
+        tags: ["Anpassungsfähigkeit", "Schnelles Lernen", "Neugier", "Growth Mindset"],
+      },
+    ],
+  },
+};
+
+export default function Skills({ language = "en" }) {
+  const t = copy[language] || copy.en;
+
   return (
     <section className="skills-section section">
       <div className="skills-header">
-        <p className="section-kicker">Core Capabilities</p>
-        <h2>Skills That Travel Across Systems</h2>
-        <p className="skills-intro">
-          My strengths sit at the intersection of validation, communication-heavy
-          systems, automation, and engineering adaptability across embedded and
-          integration-focused environments.
-        </p>
+        <p className="section-kicker">{t.kicker}</p>
+        <h2>{t.title}</h2>
+        <p className="skills-intro">{t.intro}</p>
       </div>
 
       <div className="skills-focus-strip">
@@ -26,204 +115,41 @@ export default function Skills() {
         </div>
 
         <div className="skills-focus-content">
-          <h3>Engineering Focus</h3>
-          <p>
-            I work best in embedded, communication-driven, and validation-heavy
-            environments where reliability, integration, and structured problem
-            solving matter.
-          </p>
+          <h3>{t.focusTitle}</h3>
+          <p>{t.focus}</p>
         </div>
 
         <div className="skills-focus-tags">
-          <span>Embedded</span>
-          <span>Validation</span>
-          <span>Integration</span>
+          {t.focusTags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
         </div>
       </div>
 
       <div className="skills-cards-grid">
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiActivity className="skills-card-icon pulse-icon" />
-              <h3>Validation &amp; Testing</h3>
-            </div>
+        {t.cards.map((card, index) => {
+          const Icon = icons[index];
+          const levelClass = index === 3 ? "level-growing" : index === 4 ? "level-applied" : index === 5 ? "level-core" : "level-strong";
 
-            <div className="skills-card-level level-strong">
-              <span>Strong</span>
-              <div className="skills-level-bar">
-                <i></i>
+          return (
+            <div className="skills-capability-card" key={card.title}>
+              <div className="skills-card-head">
+                <div className="skills-card-top">
+                  <Icon className="skills-card-icon pulse-icon" />
+                  <h3>{card.title}</h3>
+                </div>
+                <div className={`skills-card-level ${levelClass}`}>
+                  <span>{t.levels[index]}</span>
+                  <div className="skills-level-bar"><i></i></div>
+                </div>
+              </div>
+              <p>{card.text}</p>
+              <div className="skills-tags">
+                {card.tags.map((tag) => <span key={tag}>{tag}</span>)}
               </div>
             </div>
-          </div>
-
-          <p>
-            System-level testing, structured validation, debugging, and
-            verification-oriented engineering workflows.
-          </p>
-
-          <div className="skills-tags">
-            <span>System Validation</span>
-            <span>V&amp;V</span>
-            <span>Integration Testing</span>
-            <span>Regression Testing</span>
-            <span>Debugging</span>
-            <span>Log Analysis</span>
-          </div>
-        </div>
-
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiGitBranch className="skills-card-icon signal-icon" />
-              <h3>Communication &amp; Interfaces</h3>
-            </div>
-
-            <div className="skills-card-level level-strong">
-              <span>Strong</span>
-              <div className="skills-level-bar">
-                <i></i>
-              </div>
-            </div>
-          </div>
-
-          <p>
-            Working across protocol-driven systems where clean data flow and
-            interface reliability are essential.
-          </p>
-
-          <div className="skills-tags">
-            <span>CAN</span>
-            <span>CAN-FD</span>
-            <span>UDS</span>
-            <span>DoIP</span>
-            <span>TCP/IP</span>
-            <span>REST</span>
-            <span>UART</span>
-            <span>Ethernet</span>
-          </div>
-        </div>
-
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiTool className="skills-card-icon rotate-icon" />
-              <h3>Automation &amp; Tooling</h3>
-            </div>
-
-            <div className="skills-card-level level-strong">
-              <span>Strong</span>
-              <div className="skills-level-bar">
-                <i></i>
-              </div>
-            </div>
-          </div>
-
-          <p>
-            Building repeatable workflows using scripting, automation, and
-            structured tooling to improve engineering efficiency.
-          </p>
-
-          <div className="skills-tags">
-            <span>Python</span>
-            <span>Robot Framework</span>
-            <span>Linux</span>
-            <span>DLT</span>
-            <span>Git</span>
-            <span>Jenkins</span>
-            <span>Jira</span>
-            <span>Confluence</span>
-          </div>
-        </div>
-
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiCpu className="skills-card-icon floating-icon" />
-              <h3>Systems &amp; Domains</h3>
-            </div>
-
-            <div className="skills-card-level level-growing">
-              <span>Growing</span>
-              <div className="skills-level-bar">
-                <i></i>
-              </div>
-            </div>
-          </div>
-
-          <p>
-            A foundation shaped by embedded engineering, system integration,
-            control systems, and growing radar-oriented problem solving.
-          </p>
-
-          <div className="skills-tags">
-            <span>Embedded Systems</span>
-            <span>System Integration</span>
-            <span>Distributed Systems</span>
-            <span>Control Systems</span>
-            <span>Signal Processing</span>
-            <span>Radar Fundamentals</span>
-          </div>
-        </div>
-
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiMonitor className="skills-card-icon floating-icon" />
-              <h3>Measurement &amp; Lab Tools</h3>
-            </div>
-
-            <div className="skills-card-level level-applied">
-              <span>Applied</span>
-              <div className="skills-level-bar">
-                <i></i>
-              </div>
-            </div>
-          </div>
-
-          <p>
-            Hands-on work with hardware-oriented tools, prototyping platforms,
-            and laboratory setups used for debugging, validation, and integration.
-          </p>
-
-          <div className="skills-tags">
-            <span>Oscilloscope</span>
-            <span>Battery Simulator</span>
-            <span>Arduino</span>
-            <span>Raspberry Pi</span>
-            <span>STM32</span>
-            <span>Test Bench Setup</span>
-          </div>
-        </div>
-
-        <div className="skills-capability-card">
-          <div className="skills-card-head">
-            <div className="skills-card-top">
-              <FiTrendingUp className="skills-card-icon pulse-icon" />
-              <h3>Learning Agility</h3>
-            </div>
-
-            <div className="skills-card-level level-core">
-              <span>Core</span>
-              <div className="skills-level-bar">
-                <i></i>
-              </div>
-            </div>
-          </div>
-
-          <p>
-            In a fast-changing engineering world, what matters is not only what I
-            know today, but how quickly I can learn, adapt, and contribute to what
-            comes next.
-          </p>
-
-          <div className="skills-tags">
-            <span>Adaptability</span>
-            <span>Fast Learning</span>
-            <span>Curiosity</span>
-            <span>Growth Mindset</span>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   );

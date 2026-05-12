@@ -9,15 +9,53 @@ import {
 import {
   findLokiAnswer,
   initialLokiMessages,
+  localizeLokiResult,
   normalizeLokiInput,
   questionBank,
-  quickActions,
 } from "../data/lokiKnowledge";
 
-export default function ChatBubble() {
+const uiCopy = {
+  en: {
+    subtitle: "Portfolio chatbot",
+    topics: "Topics",
+    questions: "Do you have any questions?",
+    more: "Tell me more",
+    yes: "Yes",
+    no: "No",
+    choose: "Choose a question, or type your own",
+    hint: "Ask a follow-up, or use Topics to see questions.",
+    thinking: "Loki is thinking...",
+    placeholder: "Ask Loki a question...",
+    minimize: "Minimize",
+    bubble: "Chat with Loki",
+  },
+  de: {
+    subtitle: "Portfolio-Chatbot",
+    topics: "Themen",
+    questions: "Haben Sie noch Fragen?",
+    more: "Mehr dazu",
+    yes: "Ja",
+    no: "Nein",
+    choose: "Wählen Sie eine Frage oder tippen Sie selbst",
+    hint: "Stellen Sie eine Folgefrage oder nutzen Sie Themen.",
+    thinking: "Loki denkt nach...",
+    placeholder: "Fragen Sie Loki...",
+    minimize: "Minimieren",
+    bubble: "Mit Loki chatten",
+    initial:
+      "Hallo, ich bin Loki. Fragen Sie mich nach Lokeshs Fähigkeiten, Erfahrung, Projekten, CV oder Kontaktdaten. Sie können auch eine Frage unten auswählen.",
+  },
+};
+
+export default function ChatBubble({ language = "en" }) {
+  const t = uiCopy[language] || uiCopy.en;
+  const initialMessages = useMemo(
+    () => (language === "de" ? [{ from: "bot", text: t.initial }] : initialLokiMessages),
+    [language, t.initial]
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(initialLokiMessages);
+  const [messages, setMessages] = useState(initialMessages);
   const [suggestions, setSuggestions] = useState(questionBank.start);
   const [lastAnswer, setLastAnswer] = useState(null);
   const [isThinking, setIsThinking] = useState(false);
@@ -51,7 +89,7 @@ export default function ChatBubble() {
       return;
     }
 
-    const result = findLokiAnswer(question);
+    const result = localizeLokiResult(findLokiAnswer(question), language);
 
     setMessages((current) => [
       ...current,
@@ -80,7 +118,7 @@ export default function ChatBubble() {
   };
 
   const resetChat = () => {
-    setMessages(initialLokiMessages);
+    setMessages(initialMessages);
     setSuggestions(questionBank.start);
     setLastAnswer(null);
     setIsThinking(false);
@@ -166,7 +204,7 @@ export default function ChatBubble() {
               </span>
               <div>
                 <h2>Loki</h2>
-                <p>Portfolio chatbot</p>
+                <p>{t.subtitle}</p>
               </div>
             </div>
 
@@ -176,9 +214,9 @@ export default function ChatBubble() {
                 className="chat-panel-close"
                 onClick={showTopics}
                 aria-label="Show topics"
-                title="Show topics"
+                title={t.topics}
               >
-                Topics
+                {t.topics}
               </button>
               <button
                 type="button"
@@ -223,61 +261,58 @@ export default function ChatBubble() {
                 </div>
               </div>
             )}
-          </div>
 
-          <div className="chat-quick-actions" aria-label="Quick actions">
-            {quickActions.map((action) => (
-              <a
-                key={action.label}
-                href={action.href}
-                target={action.href.startsWith("http") ? "_blank" : undefined}
-                rel={action.href.startsWith("http") ? "noreferrer" : undefined}
-                download={action.download || undefined}
-              >
-                {action.label}
-              </a>
-            ))}
-          </div>
-
-          {showQuestionPrompt ? (
-            <div className="chat-question-prompt">
-              <p>Do you have any questions?</p>
-              <div>
-                {lastAnswer?.more && (
-                  <button type="button" onClick={tellMeMore}>
-                    Tell me more
-                  </button>
-                )}
-                <button type="button" onClick={() => handleQuestionPrompt("yes")}>
-                  Yes
-                </button>
-                <button type="button" onClick={() => handleQuestionPrompt("no")}>
-                  No
-                </button>
+            {!isThinking && showQuestionPrompt && (
+              <div className="chat-message-wrap chat-message-wrap-bot chat-action-wrap">
+                <span className="chat-speaker">Loki</span>
+                <div className="chat-message chat-message-bot chat-action-message">
+                  <p>{t.questions}</p>
+                  <div className="chat-action-buttons">
+                    {lastAnswer?.more && (
+                      <button type="button" onClick={tellMeMore}>
+                        {t.more}
+                      </button>
+                    )}
+                    <button type="button" onClick={() => handleQuestionPrompt("yes")}>
+                      {t.yes}
+                    </button>
+                    <button type="button" onClick={() => handleQuestionPrompt("no")}>
+                      {t.no}
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ) : currentSuggestions.length > 0 ? (
-            <div className="chat-suggestions" aria-label="Suggested questions">
-              {messages.length > 1 && (
-                <p className="chat-suggestions-label">
-                  Choose a question, or type your own
-                </p>
-              )}
-              {currentSuggestions.map((question) => (
-                <button
-                  type="button"
-                  key={question}
-                  onClick={() => answerQuestion(question)}
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          ) : (
-            <p className="chat-followup-hint">
-              Ask a follow-up, or use Topics to see questions.
-            </p>
-          )}
+            )}
+
+            {!isThinking && !showQuestionPrompt && currentSuggestions.length > 0 && (
+              <div className="chat-message-wrap chat-message-wrap-bot chat-action-wrap">
+                <span className="chat-speaker">Loki</span>
+                <div className="chat-message chat-message-bot chat-action-message">
+                  {messages.length > 1 && <p>{t.choose}</p>}
+                  <div className="chat-action-buttons">
+                    {currentSuggestions.map((question) => (
+                      <button
+                        type="button"
+                        key={question}
+                        onClick={() => answerQuestion(question)}
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {!isThinking && !showQuestionPrompt && currentSuggestions.length === 0 && (
+              <div className="chat-message-wrap chat-message-wrap-bot chat-action-wrap">
+                <span className="chat-speaker">Loki</span>
+                <div className="chat-message chat-message-bot chat-action-message">
+                  <p>{t.hint}</p>
+                </div>
+              </div>
+            )}
+          </div>
 
           <form className="chat-input-row" onSubmit={handleSubmit}>
             <input
@@ -285,7 +320,7 @@ export default function ChatBubble() {
               type="text"
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder={isThinking ? "Loki is thinking..." : "Ask Loki a question..."}
+              placeholder={isThinking ? t.thinking : t.placeholder}
               aria-label="Ask Loki a question"
               disabled={isThinking}
             />
@@ -312,8 +347,8 @@ export default function ChatBubble() {
           {isOpen ? <FiChevronDown /> : <FiMessageCircle />}
         </span>
         <span className="chat-bubble-text">
-          <strong>{isOpen ? "Minimize" : "Chat with Loki"}</strong>
-          <small>Portfolio bot</small>
+          <strong>{isOpen ? t.minimize : t.bubble}</strong>
+          <small>{t.subtitle}</small>
         </span>
       </button>
     </>

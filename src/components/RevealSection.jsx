@@ -6,7 +6,10 @@ export default function RevealSection({ id, className = "", children }) {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+
+    if (!node) {
+      return undefined;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -17,7 +20,8 @@ export default function RevealSection({ id, className = "", children }) {
         }
       },
       {
-        threshold: 0.35,
+        rootMargin: "-10% 0px -18% 0px",
+        threshold: 0.16,
       }
     );
 
@@ -30,7 +34,7 @@ export default function RevealSection({ id, className = "", children }) {
     <section
       id={id}
       ref={ref}
-      className={`snap-screen reveal-section ${isVisible ? "is-visible" : ""} ${className}`}
+      className={`page-section reveal-section ${isVisible ? "is-visible" : ""} ${className}`}
     >
       {children}
     </section>

@@ -1,15 +1,7 @@
 export const content = {
   en: {
-    nav: {
-      about: "About",
-      skills: "Skills",
-      experience: "Experience",
-      projects: "Projects",
-      thesis: "Thesis",
-      contact: "Contact",
-    },
     hero: {
-      greeting: "Hello, I’m",
+      greeting: "Hello, I'm",
       name: "Lokesh Reddy",
       title: "Embedded Systems Engineer",
       summary:
@@ -20,22 +12,13 @@ export const content = {
       ctaLinkedIn: "LinkedIn",
     },
   },
-
   de: {
-    nav: {
-      about: "Über mich",
-      skills: "Kenntnisse",
-      experience: "Erfahrung",
-      projects: "Projekte",
-      thesis: "Masterarbeit",
-      contact: "Kontakt",
-    },
     hero: {
       greeting: "Hallo, ich bin",
       name: "Lokesh Reddy",
       title: "Embedded-Systems-Ingenieur",
       summary:
-        "Embedded-Systems-Ingenieur mit Erfahrung in Softwarevalidierung, Testautomatisierung und Systemintegration für eingebettete elektrische und elektronische Systeme. Fundierte Kenntnisse in Python, Robot Framework, Linux, CI/CD-orientierten Workflows und Kommunikationsprotokollen, mit klarem Fokus auf Zuverlässigkeit, Prozessverbesserung und strukturiertes Problemlösen in komplexen technischen Umgebungen.",
+        "Embedded-Systems-Ingenieur mit Erfahrung in Softwarevalidierung, Testautomatisierung und Systemintegration für eingebettete elektrische und elektronische Systeme. Erfahren in Python, Robot Framework, Linux, CI/CD-orientierten Workflows und Kommunikationsprotokollen, mit Fokus auf Zuverlässigkeit, Prozessverbesserung und strukturiertes Problemlösen.",
       ctaPrimary: "Projekte ansehen",
       ctaDownloadCv: "CV herunterladen",
       ctaGithub: "GitHub",

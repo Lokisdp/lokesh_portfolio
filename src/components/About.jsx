@@ -1,30 +1,38 @@
-import { content } from "../data/content";
+const copy = {
+  en: {
+    kicker: "About",
+    title: "Validation, Integration, And Systems Thinking",
+    paragraphs: [
+      "I am an Embedded Systems Test and Integration Engineer with experience validating and debugging complex distributed systems. My work focuses on system-level verification, communication interfaces, and automation across embedded environments.",
+      "I have hands-on experience with communication protocols such as CAN, UDS, DoIP, TCP/IP, and UART, along with building Python-based automation workflows for system validation and testing.",
+      "My interests sit across system integration, communication networks, validation, and complex engineering systems, making my skills relevant across automotive, robotics, aviation, defense, sensor systems, and industrial domains.",
+    ],
+  },
+  de: {
+    kicker: "Über mich",
+    title: "Validierung, Integration Und Systemdenken",
+    paragraphs: [
+      "Ich bin Embedded-Systems-Test- und Integrationsingenieur mit Erfahrung in der Validierung und Fehlersuche komplexer verteilter Systeme. Mein Fokus liegt auf Systemverifikation, Kommunikationsschnittstellen und Automatisierung in Embedded-Umgebungen.",
+      "Ich habe praktische Erfahrung mit Kommunikationsprotokollen wie CAN, UDS, DoIP, TCP/IP und UART sowie mit Python-basierten Automatisierungsabläufen für Systemvalidierung und Testing.",
+      "Meine Interessen liegen in Systemintegration, Kommunikationsnetzwerken, Validierung und komplexen Engineering-Systemen. Dadurch sind meine Fähigkeiten für Automotive, Robotik, Luftfahrt, Verteidigung, Sensorsysteme und industrielle Domänen relevant.",
+    ],
+  },
+};
 
-export default function About({ language }) {
-  const t = content[language];
+export default function About({ language = "en" }) {
+  const t = copy[language] || copy.en;
 
   return (
-    <section id="about" className="section">
-      <h2>About</h2>
-
-      <p className="about-text">
-        I am an Embedded Systems Test & Integration Engineer with experience in 
-        validating and debugging complex distributed systems. My work focuses on 
-        system-level verification, communication interfaces, and automation across 
-        embedded environments.
-      </p>
-
-      <p className="about-text">
-        I have hands-on experience working with communication protocols such as 
-        CAN, UDS, DoIP, and TCP/IP, along with building Python-based automation 
-        tools for system validation and testing workflows.
-      </p>
-
-      <p className="about-text">
-        My interests lie in system integration, communication networks, and 
-        validation of complex engineering systems, making my skills applicable 
-        across domains such as automotive, defense, aviation, and industrial systems.
-      </p>
+    <section className="about-section section">
+      <div className="about-card">
+        <p className="section-kicker">{t.kicker}</p>
+        <h2>{t.title}</h2>
+        {t.paragraphs.map((paragraph) => (
+          <p className="about-text" key={paragraph}>
+            {paragraph}
+          </p>
+        ))}
+      </div>
     </section>
   );
 }

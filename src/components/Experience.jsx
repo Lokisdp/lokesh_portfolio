@@ -81,17 +81,30 @@ const experiences = [
 
 const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`;
 
-export default function Experience() {
+const copy = {
+  en: {
+    kicker: "Experience",
+    title: "Where I Built My Engineering Practice",
+    intro:
+      "A concise view of the environments I have worked in — from embedded validation and automation to infotainment systems, radar integration, and test-bench development.",
+  },
+  de: {
+    kicker: "Erfahrung",
+    title: "Wo Ich Meine Engineering-Praxis Aufgebaut Habe",
+    intro:
+      "Ein kompakter Überblick über meine Arbeitsumgebungen – von Embedded-Validierung und Automatisierung bis zu Infotainment-Systemen, Radarintegration und Testbench-Entwicklung.",
+  },
+};
+
+export default function Experience({ language = "en" }) {
+  const t = copy[language] || copy.en;
+
   return (
     <section className="experience-section section">
       <div className="experience-section-header">
-        <p className="section-kicker">Experience</p>
-        <h2>Where I Built My Engineering Practice</h2>
-        <p className="experience-section-intro">
-          A concise view of the environments I have worked in — from embedded
-          validation and automation to infotainment systems, radar integration,
-          and test-bench development.
-        </p>
+        <p className="section-kicker">{t.kicker}</p>
+        <h2>{t.title}</h2>
+        <p className="experience-section-intro">{t.intro}</p>
       </div>
 
       <div className="experience-grid">
