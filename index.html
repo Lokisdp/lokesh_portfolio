@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Lokesh Reddy Sodanapalli — Embedded Test & Automation Engineer in Chemnitz, Germany. ECU validation, Python automation, HIL integration and radar research." />
     <meta name="theme-color" content="#12232b" />
+    <script>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem('portfolio-theme'); } catch {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0d1921' : '#f7f7f0';
+      })();
+    </script>
     <title>Lokesh Reddy | Embedded Test & Automation</title>
-    <script type="module" crossorigin src="/lokesh_portfolio/assets/index-BhJ7y0bR.js"></script>
-    <link rel="stylesheet" crossorigin href="/lokesh_portfolio/assets/index-BzNFenW6.css">
+    <script type="module" crossorigin src="/lokesh_portfolio/assets/index-C-xfe0eu.js"></script>
+    <link rel="stylesheet" crossorigin href="/lokesh_portfolio/assets/index-BCOpIFYP.css">
   </head>
   <body>
     <div id="root"></div>
