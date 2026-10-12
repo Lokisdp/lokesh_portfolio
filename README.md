@@ -90,3 +90,8 @@ src/data/lokiKnowledge.js
 ```
 
 It can answer questions about Lokesh's roles, skills, experience, projects, industries, contact details, hobbies, availability, and profile fit.
+
+## Engineering Project Documentation
+
+- [Project index](projects/README.md): ESP32 motor-control automation, STM32 signal analysis and home energy management.
+- [Master's thesis summary](thesis/README.md): radar-based egomotion estimation; defence pending, with project files and final results to follow after the defence.
