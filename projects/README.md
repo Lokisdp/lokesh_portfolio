@@ -6,7 +6,6 @@ Selected academic projects and professional engineering summaries by Lokesh Redd
 | --- | --- | --- |
 | Radar-based egomotion estimation | Master's thesis; radar processing and validation | [Thesis](../thesis/README.md) |
 | ESP32 ECU rotation automation | Embedded C, serial control, Python and Robot Framework | [Summary](esp32-imu-wakeup/README.md) |
-| Automotive test automation | ECU diagnostics, communications and power-state validation | [Summary](automotive-test-automation/README.md) |
 | STM32 AC analysis | Embedded signal processing | [Summary](stm32-ac-analysis/README.md) |
 | Home energy management | MATLAB and Simulink; bachelor's thesis | [Summary](home-energy-management/README.md) |
 
